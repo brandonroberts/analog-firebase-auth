@@ -4,15 +4,24 @@ import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(async({ mode }) => {
+return {
   publicDir: 'src/assets',
   build: {
     target: ['es2020'],
   },
+  optimizeDeps: {
+    include: ['firebase/auth', 'rxfire/auth']
+  },
+  ssr: {
+    noExternal: ['firebase/**', 'rxfire/**'],
+  },
   resolve: {
     mainFields: ['module'],
   },
-  plugins: [analog()],
+  plugins: [
+    analog(),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -22,4 +31,5 @@ export default defineConfig(({ mode }) => ({
   define: {
     'import.meta.vitest': mode !== 'production',
   },
-}));
+}}
+);
