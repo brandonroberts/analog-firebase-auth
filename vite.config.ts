@@ -14,7 +14,7 @@ return {
     include: ['firebase/auth', 'rxfire/auth']
   },
   ssr: {
-    noExternal: ['firebase/**', 'rxfire/**'],
+    noExternal: ['rxfire/**'],
   },
   resolve: {
     mainFields: ['module'],
